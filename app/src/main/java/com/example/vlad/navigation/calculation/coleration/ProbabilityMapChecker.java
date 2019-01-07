@@ -3,6 +3,7 @@ package com.example.vlad.navigation.calculation.coleration;
 import com.example.vlad.navigation.database.model.NavigationMap;
 import com.example.vlad.navigation.database.model.NavigationWay;
 import com.example.vlad.navigation.utils.NormalizedDistribution;
+import com.example.vlad.navigation.utils.Vector;
 import com.example.vlad.navigation.utils.messageSystem.ResultMapCheck;
 
 import java.util.ArrayList;
@@ -35,7 +36,9 @@ public class ProbabilityMapChecker implements MapChecker {
     }
 
     @Override
-    public ResultMapCheck checkOnMap(float angle, float length) {
+    public ResultMapCheck checkOnMap(Vector vector) {
+        float angle = vector.z;
+        float length = (float) vector.length;
         for (int i = 0; i < current_states.size(); i++) {
             current_states.get(i).updateCurrentState(angle, length);
             if (current_states.get(i).isLineUpdated()) {
@@ -44,7 +47,7 @@ public class ProbabilityMapChecker implements MapChecker {
         }
 
         normalize();
-        return takeSolution();
+        return takeSolution(vector);
     }
 
     private void normalizeState() {
@@ -65,10 +68,10 @@ public class ProbabilityMapChecker implements MapChecker {
 
     // get max from array, get start point and return them.
     // also provide information abaut way
-    private ResultMapCheck takeSolution() {
+    private ResultMapCheck takeSolution(Vector vector) {
         CurrentStateWay currentSate = current_states.get(0);
         Point2D result = currentSate.getCurrentPoint();
-        return new ResultMapCheck(result, false/*!currentSate->getPrimaryWay()*/, false/*currentSate->isLastStep(result)*/);
+        return new ResultMapCheck(result, false/*!currentSate->getPrimaryWay()*/, false/*currentSate->isLastStep(result)*/, vector);
     };
 
     public void refreshChecker(List<Line2D> way) {

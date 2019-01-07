@@ -1,6 +1,9 @@
 package com.example.vlad.navigation.calculation.inertialSystem.threePhaseAlgorithm;
 
 import com.example.vlad.navigation.calculation.inertialSystem.Counter;
+import com.example.vlad.navigation.calculation.inertialSystem.definitionTypeStep.StepTypeDefiner;
+import com.example.vlad.navigation.calculation.inertialSystem.definitionTypeStep.StepTypeDefinerImpl;
+import com.example.vlad.navigation.utils.StepType;
 import com.example.vlad.navigation.utils.Vector;
 import com.example.vlad.navigation.utils.norming.DefoultNorm;
 import com.example.vlad.navigation.utils.norming.Norm;
@@ -27,6 +30,8 @@ public class ThreePhaseAlgorithm implements Counter{
 
     private double sumAccelerations = 0;
     private int countStep = 0;
+    private StepType currentStepType = StepType.WALK;
+    private StepTypeDefiner stepTypeDefiner = new StepTypeDefinerImpl();
 
     public ThreePhaseAlgorithm() {
         isCurrentPhaseDetected[0] = true;
@@ -61,8 +66,10 @@ public class ThreePhaseAlgorithm implements Counter{
     private boolean isStepDetected(float[] as) {
         if(isCurrentPhaseDetected[0]){
             detectingCurrentPhase(as, 1);
-            if(isCurrentPhaseDetected[1])
-                detectingCurrentPhase(as,2);
+            if(isCurrentPhaseDetected[1]) {
+                detectingCurrentPhase(as, 2);
+                currentStepType = stepTypeDefiner.define(as);
+            }
         }
         return  isCurrentPhaseDetected[0]&& isCurrentPhaseDetected[1] && isCurrentPhaseDetected[2]; //(((acc[0] > accMinVerticalForFirstPhase) && (acc[0] < accMaxVerticalForFirstPhase)) && ((acc[1] )))
     }
@@ -74,8 +81,8 @@ public class ThreePhaseAlgorithm implements Counter{
             isCurrentPhaseDetected[numberDetectingPhase] = true;
     }
 
-    private Vector parseIntoVector(double lengthStep, float[] angles) {
-        return new Vector("Data from Three phase algorithm", angles, lengthStep);
+    private Vector parseIntoVector(double lengthStep, float[] angles, StepType stepType) {
+        return new Vector("Data from Three phase algorithm", angles, lengthStep, stepType);
     }
 
     private Vector lengthStep(float[] acc, float[] angles) {
@@ -83,6 +90,6 @@ public class ThreePhaseAlgorithm implements Counter{
         double result = norm.modul(acc);
 
         sumAccelerations += result;
-        return parseIntoVector(CONST_G * Math.pow(sumAccelerations/countStep, 1.0/3.0),angles);
+        return parseIntoVector(CONST_G * Math.pow(sumAccelerations/countStep, 1.0/3.0),angles, currentStepType);
     }
 }

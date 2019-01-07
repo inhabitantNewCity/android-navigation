@@ -52,7 +52,7 @@ public class ExecutorAlgorithm  implements Runnable {
                 HashMap<String,float[]> map = device.parse(stream);
                 Log.d(TAG, map.toString());
                 Vector sendVector = counter.run(map);
-                ResultMapCheck result = mapChecker.checkOnMap((float) sendVector.length, sendVector.z);
+                ResultMapCheck result = mapChecker.checkOnMap(sendVector);
                 myQuery.add(result);
             }
         }catch (Exception e) {

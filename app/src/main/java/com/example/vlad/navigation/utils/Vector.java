@@ -15,8 +15,9 @@ public class Vector {
     public  float y;
     public  float z;
     public  double length;
+    public StepType stepType;
 
-    public Vector(String title, float[] arr, double length) throws IllegalFormatException {
+    public Vector(String title, float[] arr, double length, StepType stepType) throws IllegalFormatException {
         if(arr.length < 3) {
             throw new ArraySizeException();
         }
@@ -25,6 +26,7 @@ public class Vector {
         z = arr[2];
         this.length = length;
         this.title = title;
+        this.stepType = stepType;
     }
 
 
