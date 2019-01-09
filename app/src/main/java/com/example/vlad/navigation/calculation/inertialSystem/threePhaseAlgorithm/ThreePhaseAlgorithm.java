@@ -60,7 +60,7 @@ public class ThreePhaseAlgorithm implements Counter{
             isCurrentPhaseDetected[2] = false;
             return lengthStep(acc, map.get(nameFieldsDevice[3]));
         }
-        return null;
+        return lengthStep(acc, map.get(nameFieldsDevice[3]));
     }
 
     private boolean isStepDetected(float[] as) {

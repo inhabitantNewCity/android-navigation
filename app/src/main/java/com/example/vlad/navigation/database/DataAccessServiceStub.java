@@ -23,6 +23,12 @@ public class DataAccessServiceStub implements DataAccessService {
             add(new Line2D(100,100,50,100));
             add(new Line2D(100,100,150,100));
             add(new Line2D(100,100,100,300));
+            add(new Line2D(100,300,100,400));
+            add(new Line2D(100,400,100,500));
+            add(new Line2D(100,300,200,300));
+            add(new Line2D(200,300,200,200));
+            add(new Line2D(200,300,200,400));
+            add(new Line2D(200,400,200,500));
         }};
         return new NavigationMap(linesMap);
     }
@@ -34,6 +40,8 @@ public class DataAccessServiceStub implements DataAccessService {
             add(new Line2D(100,0,100,100));
             add(new Line2D(100,100,100,200));
             add(new Line2D(100,100,100,300));
+            add(new Line2D(100,300,100,400));
+            add(new Line2D(100,400,100,500));
         }};
         return new NavigationWay(linesMap);
     }
