@@ -19,6 +19,8 @@ import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import math.geom2d.Point2D;
+
 /**
  * Created by Tmp on 14.02.2016.
  */
@@ -46,13 +48,18 @@ public class ExecutorAlgorithm  implements Runnable {
     public void run()  {
 
         try {
-            Counter counter = AlgorithmFactory.getAlgorithmOnIndex(2);
+            Counter counter = AlgorithmFactory.getAlgorithmOnIndex(0);
             InputOutputStream stream = connection.runReadDate();
             while (true){
                 HashMap<String,float[]> map = device.parse(stream);
                 Log.d(TAG, map.toString());
                 Vector sendVector = counter.run(map);
-                ResultMapCheck result = mapChecker.checkOnMap(sendVector);
+                ResultMapCheck result;
+                if(sendVector != null) {
+                    result = mapChecker.checkOnMap(sendVector);
+                } else {
+                    result = new ResultMapCheck(new Point2D(0,0), false, false, sendVector);
+                }
                 myQuery.add(result);
             }
         }catch (Exception e) {

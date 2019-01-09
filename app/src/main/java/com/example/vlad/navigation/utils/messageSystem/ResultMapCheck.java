@@ -24,11 +24,26 @@ public class ResultMapCheck implements MessageSystem {
         this.point2D = source.point2D;
         this.isUpdated = source.isUpdated;
         this.isFinished = source.isFinished;
-        this.vector = source.vector;
     }
 
     @Override
     public Object getMessage() {
         return this;
+    }
+
+    public Point2D getPoint2D() {
+        return point2D;
+    }
+
+    public boolean isUpdated() {
+        return isUpdated;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public Vector getVector() {
+        return vector;
     }
 }

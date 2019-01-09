@@ -97,11 +97,11 @@ public class DrawerChanges implements Runnable {
         canvas = builderSpaceForDraw.lockCanvas();
         try {
             synchronized (builderSpaceForDraw) {
-                    Paint pen = new Paint();
-                    pen.setColor(Color.RED);
-                    canvas.drawLine(start.x,start.y, finish.x,finish.y, pen);
-                    start.x = finish.x;
-                    start.y = finish.y;
+                Paint pen = new Paint();
+                pen.setColor(Color.RED);
+                canvas.drawLine(start.x,start.y, finish.x,finish.y, pen);
+                start.x = finish.x;
+                start.y = finish.y;
                 // canvas.drawBitmap(picture, matrix, null);
             }
         }
