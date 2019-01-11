@@ -1,13 +1,14 @@
 package com.example.vlad.navigation.calculation.machineVisionSystem.filtration;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.support.annotation.NonNull;
 
 public class BlurImage implements Comparable {
-    private Image image;
+    private Bitmap image;
     private Double gauseDestribution;
 
-    public BlurImage(Image image) {
+    public BlurImage(Bitmap image) {
         this.image = image;
     }
 
@@ -20,11 +21,11 @@ public class BlurImage implements Comparable {
         return 0;
     }
 
-    public Image getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 

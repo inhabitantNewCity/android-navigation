@@ -15,6 +15,6 @@ public class OnImageAvailableListener implements ImageReader.OnImageAvailableLis
 
     @Override
     public void onImageAvailable(ImageReader reader) {
-        fragment.mBackgroundHandler.post(new ImageProcessor(reader.acquireNextImage(), fragment.mFile));
+        fragment.mBackgroundHandler.post(new ImageProcessor(reader.acquireNextImage()));
     }
 }

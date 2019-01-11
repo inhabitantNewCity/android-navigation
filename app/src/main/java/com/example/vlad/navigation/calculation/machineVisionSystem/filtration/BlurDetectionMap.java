@@ -1,5 +1,6 @@
 package com.example.vlad.navigation.calculation.machineVisionSystem.filtration;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import java.util.SortedSet;
@@ -20,7 +21,7 @@ public class BlurDetectionMap {
         return instance;
     }
 
-    public Image getImage(Image image){
+    public Bitmap getImage(Bitmap image){
         BlurImage topImage = query.first();
         Double gause = detector.blurDetection(image);
         if(topImage.getGauseDestribution().compareTo(gause) != -1) {

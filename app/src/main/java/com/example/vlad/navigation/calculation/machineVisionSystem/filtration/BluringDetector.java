@@ -1,7 +1,7 @@
 package com.example.vlad.navigation.calculation.machineVisionSystem.filtration;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 public interface BluringDetector {
-    Double blurDetection(Image image);
+    Double blurDetection(Bitmap image);
 }
