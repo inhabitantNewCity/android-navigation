@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: 18.12.2018 add implementation of sigma definition
+
 public class BluringDetectorImpl implements BluringDetector {
 
     private static final double CONST_G = 0.5;
