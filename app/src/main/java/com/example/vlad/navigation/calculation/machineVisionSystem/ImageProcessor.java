@@ -3,6 +3,7 @@ package com.example.vlad.navigation.calculation.machineVisionSystem;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.util.Log;
 
 import com.example.vlad.navigation.calculation.machineVisionSystem.filtration.BlurDetectionMap;
 import com.example.vlad.navigation.database.DataAccessFactory;
