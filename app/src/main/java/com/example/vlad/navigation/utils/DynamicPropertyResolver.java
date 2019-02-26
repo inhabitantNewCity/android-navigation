@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DynamicPropertyResolver {
-//values/colors.xml
+
     private static final String CONFIGURATION_FILE_NAME = "application/application.properties";
 
     public static String getStringProperty(String key, String defaultValue) {
