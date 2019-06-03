@@ -18,7 +18,7 @@ public class DataAccessServiceRest implements DataAccessService {
 
     @Override
     public NavigationWay getWay() {
-        return cache.getWay(new Point(), new Point(), "CORP1FLOOR2");
+        return cache.getWay("1", "2","CORP1FLOOR2");
     }
 
     @Override

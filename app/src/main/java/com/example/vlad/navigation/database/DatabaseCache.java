@@ -28,20 +28,27 @@ public class DatabaseCache {
     public NavigationMap getMap(String name){
         NavigationMap entity = caches.get(name);
         if(entity == null) {
-            entity = client.getMap(name);
-            caches.put(name, entity);
+            client.getMap(name);
         }
-        return entity;
+        return caches.get(name);
     }
 
-    public NavigationWay getWay(Point pointStart, Point pointEnd, String name){
-        String key = name + pointStart + pointEnd;
+    public NavigationWay getWay(String pointStart, String pointEnd, String name){
+        String key = name+pointStart+pointEnd;
         NavigationWay entity = (NavigationWay) caches.get(key);
         if(entity == null) {
-            entity = client.getWay(pointStart, pointEnd, name);
-            caches.put(key, entity);
+            client.getWay(name);
         }
-        return entity;
+        return (NavigationWay) caches.get(key);
+    }
+
+
+    public void setMap(String name, NavigationMap entity){
+        caches.put(name, entity);
+    }
+
+    public void setWay(String name, NavigationWay entity){
+        caches.put(name, entity);
     }
 
 }

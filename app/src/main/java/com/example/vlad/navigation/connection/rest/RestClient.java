@@ -9,7 +9,7 @@ import com.loopj.android.http.SyncHttpClient;
 
 public class RestClient {
 
-    private static final String BASE_URL = "http://192.168.1.37:8080/";
+    private static final String BASE_URL = "http://172.20.10.4:8080/";
 
     private SyncHttpClient client = new SyncHttpClient();
 

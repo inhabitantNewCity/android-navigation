@@ -33,7 +33,7 @@ public class DatabaseClient extends RestClient {
         return (NavigationMap) handle.getTag();
     }
 
-    public NavigationWay getWay(Point pointStart, Point pointFinish, String mapName){
+    public NavigationWay getWay(String mapName){
         RequestParams rp = new RequestParams();
         RequestHandle handle = get(GET_WAY, rp, new WayJsonHandler());
         return (NavigationWay) handle.getTag();

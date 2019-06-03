@@ -1,7 +1,12 @@
 package com.example.vlad.navigation.database.model;
 
+import com.example.vlad.navigation.connection.rest.FlexibleFloatDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 public class Point {
+    @JsonDeserialize(using = FlexibleFloatDeserializer.class)
     private float x;
+    @JsonDeserialize(using = FlexibleFloatDeserializer.class)
     private float y;
 
     public float getX() {

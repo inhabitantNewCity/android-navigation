@@ -2,6 +2,7 @@ package com.example.vlad.navigation.connection.rest.parser;
 
 import android.util.Log;
 
+import com.example.vlad.navigation.database.DatabaseCache;
 import com.example.vlad.navigation.database.model.Line;
 import com.example.vlad.navigation.database.model.NavigationMap;
 import com.example.vlad.navigation.database.model.NavigationWay;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ public class WayJsonHandler extends JsonHttpResponseHandler {
 
     private ObjectMapper mapper;
     private CollectionType typeReference;
+    private DatabaseCache instance = DatabaseCache.getInstance();
 
     public WayJsonHandler() {
         this.mapper = new ObjectMapper();
@@ -29,22 +32,14 @@ public class WayJsonHandler extends JsonHttpResponseHandler {
     }
 
     @Override
-    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
         try {
-            List<Line> lines = mapper.readValue(responseString, typeReference);
+            List<Line> lines = mapper.readValue(response.toString(), typeReference);
+            NavigationWay map = new NavigationWay(NavigationWay.convert(lines));
+            instance.setWay("CORP1FLOOR212", map);
+            super.onSuccess(statusCode, headers, response);
         } catch (IOException e) {
-            Log.d("error", e.getMessage());
+            e.printStackTrace();
         }
-    }
-
-    @Override
-    protected NavigationWay parseResponse(byte[] responseBody) throws JSONException {
-        try {
-            List<Line> lines = mapper.readValue(responseBody, typeReference);
-            return new NavigationWay(NavigationMap.convert(lines));
-        } catch (IOException e) {
-            Log.d("error", e.getMessage());
-        }
-        return null;
     }
 }
